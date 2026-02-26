@@ -8,9 +8,9 @@
 -- MEF: https://tinyurl.com/4jmju6vv
 --
 -- Arquitectura:
---   - DATAPATH: Sincronizador, registro de desplazamiento, registro de salida,
---               decodificador BIN a 7 segmentos, temporizador y contador de bits
---   - CONTROL: Maquina de estados finitos (MEF) que gestiona la recepcion
+--  - DATAPATH: Sincronizador, registro de desplazamiento, registro de salida,
+--               decodificador BIN a 7 segmentos
+--  - CONTROL: Maquina de estados finitos (MEF), temporizador y contador de bits
 -------------------------------------------------------------------------------
 
 -- TODO: Anadir librerias necesarias.
