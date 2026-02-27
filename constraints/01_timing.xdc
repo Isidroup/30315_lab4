@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------------
-# Archivo: timing_constraints.xdc
+# Archivo: 01_timing.xdc
 # Descripcion: Restricciones de temporizacion para diseno uart_rx
 # --------------------------------------------------------------------------------
 
