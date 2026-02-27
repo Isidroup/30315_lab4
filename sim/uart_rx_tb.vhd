@@ -120,7 +120,7 @@ begin
         -- T3: Verificar la recepcion correcta de un dato
         -----------------------------------------------------------------------
         test <= T3;
-        tx_byte  <= x"55"; -- Dato a transmitir: 'P' (ASCII 0x50)
+        tx_byte  <= x"55"; -- Dato a transmitir: 'U' (ASCII 0x55)
         rx_tb <= '0';   -- Bit de start
         for i in 0 to 7 loop    -- Iteracion por cada bit de dato
             wait for BIT_time;  -- Espera tiempo de 1 bit
