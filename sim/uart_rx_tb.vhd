@@ -12,7 +12,7 @@
 --   T2: Sincronizacion de la senal RX
 --   T3: Recepcion correcta de un dato
 --   T4: Verificacion de errores (glitch en start, error en stop)
---   T5: Recepcion de tx_sequence consecutivos
+--   T5: Recepcion de rx_sequence consecutivos
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -58,10 +58,10 @@ architecture Behavioral of uart_rx_tb is
 
     -- Senales del emulador de transmisor serie
     signal numero  : character;                 -- Caracter visualizado en 7 segmentos
-    type tx_sequence_t is array (0 to 10) of unsigned(7 downto 0);
-    signal tx_sequence : tx_sequence_t := (x"30", x"31", x"32", x"33", x"34",
+    type rx_sequence_t is array (0 to 10) of unsigned(7 downto 0);
+    signal rx_sequence : rx_sequence_t := (x"30", x"31", x"32", x"33", x"34",
                                     x"35", x"36", x"37", x"38", x"39", x"20");
-    signal tx_byte  : unsigned(7 downto 0);        -- Byte a transmitir en el test
+    signal rx_byte  : unsigned(7 downto 0);        -- Byte a recibir en el test
 
     -- Indicador de número de test
     type test_t is (T1, T2, T3, T41, T42, T5);
@@ -120,11 +120,11 @@ begin
         -- T3: Verificar la recepcion correcta de un dato
         -----------------------------------------------------------------------
         test <= T3;
-        tx_byte  <= x"55"; -- Dato a transmitir: 'U' (ASCII 0x55)
+        rx_byte  <= x"55"; -- Dato a transmitir: 'U' (ASCII 0x55)
         rx_tb <= '0';   -- Bit de start
         for i in 0 to 7 loop    -- Iteracion por cada bit de dato
             wait for BIT_time;  -- Espera tiempo de 1 bit
-            rx_tb <= tx_byte(i);   -- Transmite el bit LSB primero
+            rx_tb <= rx_byte(i);   -- Transmite el bit LSB primero
         end loop;
         wait for BIT_time;
         rx_tb <= '1';   -- Bit de stop
@@ -148,11 +148,11 @@ begin
 
         -- T4.2: Error en bit de stop (debe rechazar la trama)
         test <= T42;
-        tx_byte  <= x"50"; -- Dato a transmitir
+        rx_byte  <= x"50"; -- Dato a transmitir
         rx_tb <= '0';   -- Bit de start
         for i in 0 to 7 loop    -- Iteracion por cada bit de dato
             wait for BIT_time;  -- Espera tiempo de 1 bit
-            rx_tb <= tx_byte(i);   -- Transmite el bit LSB primero
+            rx_tb <= rx_byte(i);   -- Transmite el bit LSB primero
         end loop;
         wait for BIT_time;
         rx_tb <= '0';   -- Bit de stop incorrecto (deberia ser '1')
@@ -163,17 +163,17 @@ begin
         -- >>> Pon un breakpoint en la linea anterior y Comprueba T4.2
 
         -----------------------------------------------------------------------
-        -- T5: Verificar la recepcion de tx_sequence consecutivos
+        -- T5: Verificar la recepcion de rx_sequence consecutivos
         -- Transmite la secuencia: "0123456789 " (digitos y espacio)
         -----------------------------------------------------------------------
         test <= T5;
         rx_tb <= '1';
-        for j in tx_sequence'range loop
-            tx_byte  <= tx_sequence(j);
+        for j in rx_sequence'range loop
+            rx_byte  <= rx_sequence(j);
             rx_tb <= '0';       -- Bit de start
             for i in 0 to 7 loop    -- Iteracion por cada bit de dato
                 wait for BIT_time;  -- Espera tiempo de 1 bit
-                rx_tb <= tx_byte(i);   -- Transmite el bit LSB primero
+                rx_tb <= rx_byte(i);   -- Transmite el bit LSB primero
             end loop;
             wait for BIT_time;
             rx_tb <= '1';       -- Bit de stop
