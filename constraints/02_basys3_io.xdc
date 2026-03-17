@@ -5,10 +5,10 @@
 # ================================================================================
 
 # ================================================================================
-# 1. LEDs - Visualizacion de datos recibidos (DATO[0..6])
+# 1. LEDs - Visualizacion de datos recibidos (DATO[0..7])
 # ================================================================================
 
-# TODO: Asignar pines para los 7 LEDs (DATO[0..6]) que muestran el valor recibido por UART
+# TODO: Asignar pines para los 8 LEDs (DATO[0..7]) que muestran el valor recibido por UART
 
 
 # Indicador LED de dato recibido (DRI)
@@ -42,7 +42,7 @@ set_property PACKAGE_PIN L1  [get_ports {DRI}]      ; # LED LD15 - Indicador de 
 # ================================================================================
 # 5. Comunicaciones Serie (UART)
 # ================================================================================
-# Puerto de recepcion UART a 9600 baudios (RS232)
+# Puerto de recepcion UART a 19200 baudios (RS232)
 
 # TODO: Asignar pin para la señal de recepcion UART (RX) que recibe datos desde un dispositivo externo (PC, etc.)
 
