@@ -100,7 +100,7 @@ begin
         -- T1: Reset y condiciones iniciales
         -----------------------------------------------------------------------
         rst_tb <= '1',
-                  '0' after 35 ns;
+                  '0' after 36 ns;
         wait for 40 ns;
         wait for 0 ns;
         -- >>> Pon un breakpoint en la linea anterior y Comprueba T1.1 .. T1.7
@@ -180,8 +180,7 @@ begin
             wait for BIT_time;  -- Tiempo entre caracteres
         end loop;
         wait for 0 ns;
-        -- >>> Pon un breakpoint en la linea anterior y Comprueba T5 .. T8
-        -- >>> Utiliza la simulacion completa para verificar T9
+        -- >>> Pon un breakpoint en la linea anterior y Comprueba T5
 
         wait; -- Pausa para finalizar el proceso
     end process;
